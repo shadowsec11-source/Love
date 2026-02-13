@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️ For You, My Love</title>
+
+    <!-- Google Fonts - Distinctive Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&family=Cinzel:wght@400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Three.js for 3D effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- 3D Background Canvas -->
+    <canvas id="bg3d"></canvas>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-content">
+            <div class="heart-loader">❤️</div>
+            <p class="loading-text">Loading something special...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">Our Story</div>
+        <div class="nav-links">
+            <a href="#hero" class="nav-link">Home</a>
+            <a href="#timeline" class="nav-link">Timeline</a>
+            <a href="#gallery" class="nav-link">Memories</a>
+            <a href="#message" class="nav-link">Messages</a>
+            <a href="#stats" class="nav-link">Stats</a>
+        </div>
+        <div class="nav-upload">
+            <button class="upload-btn" onclick="document.getElementById('photoUpload').click()">
+                📸 Add Photo
+            </button>
+            <input type="file" id="photoUpload" accept="image/*" style="display: none;" onchange="uploadPhoto(event)">
+        </div>
+    </nav>
+
+    <!-- Hero Section with 3D Title -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <div class="hero-subtitle" data-aos="fade-up">To the most amazing person in my life</div>
+            <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                <span class="title-word">My</span>
+                <span class="title-word">Beautiful</span>
+                <span class="title-word">Love</span>
+            </h1>
+            <div class="hero-description" data-aos="fade-up" data-aos-delay="400">
+                Every moment with you feels like a dream I never want to wake up from
+            </div>
+            <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="600">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <div class="scroll-text">Scroll to explore our story</div>
+            </div>
+        </div>
+
+        <!-- Floating 3D Hearts -->
+        <div class="floating-hearts-3d"></div>
+    </section>
+
+    <!-- Stats Dashboard -->
+    <section id="stats" class="stats-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Our Journey in Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat-card" data-aos="flip-left" data-aos-delay="0">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-number" id="daysTogether">0</div>
+                    <div class="stat-label">Days Together</div>
+                </div>
+                <div class="stat-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="stat-icon">💌</div>
+                    <div class="stat-number" id="messagesSent">0</div>
+                    <div class="stat-label">Love Messages</div>
+                </div>
+                <div class="stat-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="stat-icon">📸</div>
+                    <div class="stat-number" id="photosShared">0</div>
+                    <div class="stat-label">Memories Captured</div>
+                </div>
+                <div class="stat-card" data-aos="flip-left" data-aos-delay="300">
+                    <div class="stat-icon">❤️</div>
+                    <div class="stat-number" id="loveLevel">100</div>
+                    <div class="stat-label">Love Level</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Timeline -->
+    <section id="timeline" class="timeline-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Our Love Story</h2>
+            <div class="timeline">
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">First Meeting</div>
+                        <h3>When Our Eyes First Met</h3>
+                        <p>That magical moment when I knew my life was about to change forever. The butterflies, the nervous smiles, the instant connection.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">First Date</div>
+                        <h3>The Beginning of Us</h3>
+                        <p>Every second felt perfect. Your laugh, your smile, the way you made me feel like the luckiest person alive.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Making It Official</div>
+                        <h3>Best Decision Ever</h3>
+                        <p>The day I asked you to be mine, and you said yes. My heart has been yours ever since.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Today & Forever</div>
+                        <h3>Every Day Gets Better</h3>
+                        <p>And this is just the beginning. So many more memories to create, adventures to have, and moments to cherish together.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Photo Gallery -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Our Beautiful Moments</h2>
+            <div class="gallery-3d" id="photoGallery">
+                <!-- Photos will be loaded dynamically -->
+                <div class="gallery-placeholder" data-aos="zoom-in">
+                    <div class="placeholder-content">
+                        <div class="placeholder-icon">📸</div>
+                        <p>Upload photos to see them come alive here!</p>
+                        <button class="cta-btn" onclick="document.getElementById('photoUpload').click()">
+                            Add First Photo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reasons I Love You -->
+    <section class="reasons-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Why I Love You</h2>
+            <div class="reasons-grid">
+                <div class="reason-card glass" data-aos="fade-up" data-aos-delay="0">
+                    <div class="reason-icon">✨</div>
+                    <h3>Your Radiant Smile</h3>
+                    <p>Your smile is my favorite view in the entire world. It lights up even my darkest days and reminds me why I'm the luckiest person alive.</p>
+                </div>
+
+                <div class="reason-card glass" data-aos="fade-up" data-aos-delay="100">
+                    <div class="reason-icon">💫</div>
+                    <h3>Your Beautiful Soul</h3>
+                    <p>The kindness you show, the compassion you give, the way you care for everyone around you - your soul is pure magic.</p>
+                </div>
+
+                <div class="reason-card glass" data-aos="fade-up" data-aos-delay="200">
+                    <div class="reason-icon">🌟</div>
+                    <h3>Your Infectious Laughter</h3>
+                    <p>Your laugh is my favorite sound in the universe. I'd do anything to hear it, and I promise to make you laugh every single day.</p>
+                </div>
+
+                <div class="reason-card glass" data-aos="fade-up" data-aos-delay="300">
+                    <div class="reason-icon">💖</div>
+                    <h3>Simply Being You</h3>
+                    <p>You don't have to try to be perfect - you already are. Everything about you, from your quirks to your dreams, makes you absolutely perfect to me.</p>
+                </div>
+
+                <div class="reason-card glass" data-aos="fade-up" data-aos-delay="400">
+                    <div class="reason-icon">🌈</div>
+                    <h3>The Way You Love</h3>
+                    <p>You love with your whole heart, unconditionally and beautifully. Being loved by you is the greatest gift I've ever received.</p>
+                </div>
+
+                <div class="reason-card glass" data-aos="fade-up" data-aos-delay="500">
+                    <div class="reason-icon">🦋</div>
+                    <h3>You Make Me Better</h3>
+                    <p>Every day with you, I become a better version of myself. You inspire me, challenge me, and support me in ways I never imagined possible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Message Wall -->
+    <section id="message" class="message-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Our Message Wall</h2>
+            <div class="message-input-container" data-aos="fade-up">
+                <textarea id="messageInput" placeholder="Write a sweet message..." rows="4"></textarea>
+                <button class="submit-btn" onclick="submitMessage()">Send Love 💕</button>
+            </div>
+            <div class="messages-wall" id="messagesWall">
+                <!-- Messages will load dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Love Letter -->
+    <section class="letter-section">
+        <div class="container">
+            <div class="love-letter glass" data-aos="zoom-in">
+                <div class="letter-header">A Letter to You</div>
+                <div class="letter-content">
+                    <p class="letter-greeting">My Dearest Love,</p>
+
+                    <p>If I could capture all the feelings I have for you in words, this letter would never end. But let me try to express just a fraction of what my heart holds for you.</p>
+
+                    <p>From the moment you entered my life, everything changed. Colors became brighter, music sounded sweeter, and every day became an adventure I looked forward to. You didn't just become a part of my life - you became my life's greatest blessing.</p>
+
+                    <p>I love you for a thousand reasons and more. I love your strength when faced with challenges, your gentleness when dealing with others, your ambition to chase your dreams, and your humility in celebrating your victories.</p>
+
+                    <p>Thank you for choosing me. Thank you for your patience, your understanding, your unconditional love. Thank you for being my best friend, my partner, my everything.</p>
+
+                    <p>This website is just a small token of my love for you. Every photo, every message, every moment we share - they're all precious treasures I hold dear in my heart.</p>
+
+                    <p class="letter-closing">I promise to love you, cherish you, and stand by you through every season of life. Today, tomorrow, and always.</p>
+
+                    <p class="letter-signature">
+                        Forever yours,<br>
+                        <span class="signature">Your Loving Partner ❤️</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Made with 💕 and endless love</p>
+            <p class="footer-date">Our journey continues every day...</p>
+        </div>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
